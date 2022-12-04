@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://nettuts.hu/jms/sevens/',
+  // apiUrl: 'https://nettuts.hu/jms/sevens/',
+  apiUrl: 'http://localhost:3000/',
 };
 
 /*
