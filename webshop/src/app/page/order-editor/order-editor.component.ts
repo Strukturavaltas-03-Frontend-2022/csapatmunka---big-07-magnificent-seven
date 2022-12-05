@@ -19,4 +19,10 @@ export class OrderEditorComponent {
     private router: Router
   ) {}
   ngOnInit(): void {}
+
+  onUpdate(order: Order): void {
+    this.orderService
+      .update(order)
+      .subscribe((order) => this.router.navigate(['/']));
+  }
 }
