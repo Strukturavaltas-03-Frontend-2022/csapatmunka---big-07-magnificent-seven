@@ -10,7 +10,7 @@ import { Bill } from '../model/bill';
 export class BillService {
   apiUrl: string = environment.apiUrl;
 
-  entityName: string = 'bills';
+  entityName: string = 'bill';
 
   constructor(private http: HttpClient) {}
 

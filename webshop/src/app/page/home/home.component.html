@@ -1,1 +1,119 @@
-<p>home works!</p>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let col of customerColumns">{{ col.title }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of customerList$ | async">
+          <td *ngFor="let col of customerColumns">
+            {{ row[col.key] }}
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                [routerLink]="['/user/edit', row.id]"
+                class="btn btn-info"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let col of productColumns">{{ col.title }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of productList$ | async">
+          <td *ngFor="let col of productColumns">
+            {{ row[col.key] }}
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                [routerLink]="['/user/edit', row.id]"
+                class="btn btn-info"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let col of orderColumns">{{ col.title }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of orderList$ | async">
+          <td *ngFor="let col of orderColumns">
+            {{ row[col.key] }}
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                [routerLink]="['/user/edit', row.id]"
+                class="btn btn-info"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let col of billColumns">{{ col.title }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of billList$ | async">
+          <td *ngFor="let col of billColumns">
+            {{ row[col.key] }}
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                [routerLink]="['/user/edit', row.id]"
+                class="btn btn-info"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

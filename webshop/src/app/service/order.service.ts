@@ -10,7 +10,7 @@ import { Order } from '../model/order';
 export class OrderService {
   apiUrl: string = environment.apiUrl;
 
-  entityName: string = 'orders';
+  entityName: string = 'order';
 
   constructor(private http: HttpClient) {}
 
