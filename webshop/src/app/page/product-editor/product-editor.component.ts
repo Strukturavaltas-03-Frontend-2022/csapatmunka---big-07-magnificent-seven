@@ -19,4 +19,10 @@ export class ProductEditorComponent {
     private router: Router
   ) {}
   ngOnInit(): void {}
+
+  onUpdate(product: Product): void {
+    this.productService
+      .update(product)
+      .subscribe((product) => this.router.navigate(['/']));
+  }
 }
