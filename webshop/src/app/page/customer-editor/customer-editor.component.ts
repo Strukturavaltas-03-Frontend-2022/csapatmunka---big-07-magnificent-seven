@@ -20,4 +20,10 @@ export class CustomerEditorComponent {
   ) {}
 
   ngOnInit(): void {}
+
+  onUpdate(customer: Customer): void {
+    this.customerService
+      .update(customer)
+      .subscribe((customer) => this.router.navigate(['/']));
+  }
 }

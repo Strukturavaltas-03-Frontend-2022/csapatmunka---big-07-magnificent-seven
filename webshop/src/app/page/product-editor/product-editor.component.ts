@@ -20,11 +20,6 @@ export class ProductEditorComponent {
   ) {}
   ngOnInit(): void {}
 
-  // onUpdate(product: Product): void {
-  //   this.productService
-  //     .update(product)
-  //     .subscribe((product) => this.router.navigate(['/']));
-  // }
   onUpdate(product: Product): void {
     switch (product.type) {
       case 'documentary':
