@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './common/header/header.component';
+import { ProductEditorComponent } from './page/product-editor/product-editor.component';
+import { CustomerEditorComponent } from './page/customer-editor/customer-editor.component';
+import { OrderEditorComponent } from './page/order-editor/order-editor.component';
+import { BillEditorComponent } from './page/bill-editor/bill-editor.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,10 @@ import { HeaderComponent } from './common/header/header.component';
     SidebarComponent,
     HomeComponent,
     HeaderComponent,
+    ProductEditorComponent,
+    CustomerEditorComponent,
+    OrderEditorComponent,
+    BillEditorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
