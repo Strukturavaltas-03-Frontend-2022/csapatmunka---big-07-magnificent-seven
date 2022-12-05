@@ -10,7 +10,7 @@ import { Product } from '../model/product';
 export class ProductService {
   apiUrl: string = environment.apiUrl;
 
-  entityName: string = 'products';
+  entityName: string = 'product';
 
   constructor(private http: HttpClient) {}
 
