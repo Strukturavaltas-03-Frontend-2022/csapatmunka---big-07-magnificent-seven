@@ -21,4 +21,10 @@ export class BillEditorComponent {
   ) {}
 
   ngOnInit(): void {}
+
+  onUpdate(bill: Bill): void {
+    this.billService
+      .update(bill)
+      .subscribe((bill) => this.router.navigate(['/']));
+  }
 }
