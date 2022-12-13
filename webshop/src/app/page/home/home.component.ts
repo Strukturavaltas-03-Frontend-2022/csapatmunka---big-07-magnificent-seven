@@ -1,38 +1,83 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Bill } from 'src/app/model/bill';
-import { Customer } from 'src/app/model/customer';
-import { Order } from 'src/app/model/order';
-import { Product } from 'src/app/model/product';
-import { BillService } from 'src/app/service/bill.service';
-import { ConfigService, ITableColumn } from 'src/app/service/config.service';
-import { CustomerService } from 'src/app/service/customer.service';
-import { OrderService } from 'src/app/service/order.service';
-import { ProductService } from 'src/app/service/product.service';
-
+import { ApiService } from './shared/services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { AddproductdialogComponent } from './addproductdialog/addproductdialog.component';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  customerColumns: ITableColumn[] = this.config.customerTableColumns;
-  productColumns: ITableColumn[] = this.config.productTableColumns;
-  orderColumns: ITableColumn[] = this.config.orderTableColumns;
-  billColumns: ITableColumn[] = this.config.billTableColumns;
+export class AppComponent implements OnInit {
+  displayedColumns: string[] = [
+    'firstName',
+    'lastName',
+    'email',
+    'address',
+    'action'
+  ];
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  constructor(public dialog: MatDialog, private api: ApiService) {}
+  ngOnInit(): void {
+    this.getAllProuducts();
+  }
+  openDialog() {
+    let dialogBox = this.dialog.open(AddproductdialogComponent, {
+      width: '30%',
+    });
+    dialogBox.afterClosed().subscribe((val) => {
+      if(val==="save"){
+        this.getAllProuducts();
+      }
+    });
+  }
+  getAllProuducts() {
+    this.api.getProduct().subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: (err) => {
+        alert('some Error occured while fetching');
+      },
+    });
+  }
+  editProduct(row : any){
+    this.dialog.open(AddproductdialogComponent,{
+      width:'30%',
+      data:row
+    }).afterClosed().subscribe(val=>{
+      if(val==="update"){
+        this.getAllProuducts();
+      }
+    })
+  }
+  delete(row:any){
+    this.api.deleteProduct(row.id)
+    .subscribe({
+      next:(res)=>{
+        alert("deleted Successfully");
+        this.getAllProuducts();
+      },
+      error:(err)=>{
+        alert("Error while deleting");
+      }
+    })
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  customerList$: Observable<Customer[]> = this.customerService.getAll();
-  productList$: Observable<Product[]> = this.productService.getAll();
-  orderList$: Observable<Order[]> = this.orderService.getAll();
-  billList$: Observable<Bill[]> = this.billService.getAll();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
-  constructor(
-    private config: ConfigService,
-    private customerService: CustomerService,
-    private productService: ProductService,
-    private orderService: OrderService,
-    private billService: BillService
-  ) {}
 
-  ngOnInit(): void {}
+
 }
