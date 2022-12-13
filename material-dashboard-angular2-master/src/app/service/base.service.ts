@@ -47,17 +47,6 @@ export class BaseService<T extends { id: number }> {
     );
   }
 
-  like(key: string, value: string, limit: number = 10): Observable<T[]> {
-    key = `${key}_like`;
-    const query = `${this.config.apiUrl}/${this.entityName}?${key}=${value}&_limit=${limit}`;
-    return this.http.get<T[]>(query);
-  }
-
-  fullText(value: string): Observable<T[]> {
-    const query = `${this.config.apiUrl}/${this.entityName}?q=${value}`;
-    return this.http.get<T[]>(query);
-  }
-
 }
 
 
