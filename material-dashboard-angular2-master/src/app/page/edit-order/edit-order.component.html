@@ -1,0 +1,50 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngIf="order" class="col-6 offset-3 bg-light">
+                <button [routerLink]="'/order-list'" class="btn btn-info btn-block btn-lg mt-3">
+                    <i class="fa fa-arrow-circle-left"></i>
+                </button>
+                <h1 class="h2 text-center text-primary pt-3">{{ title }}</h1>
+                <label>{{'#'+ order.id}}</label>
+                <form #orderForm="ngForm" (ngSubmit)="onUpdate(orderForm, order)">
+                    <div class="form-group my-3">
+                        <label for="customerID">Customer ID</label>
+                        <input name="customerID" [(ngModel)]="order.customerID" type="text" class="form-control"
+                            pattern="^[1-9]{1}[0-9]{0,1}" required>
+                        <div [hidden]="orderForm.controls.customerID?.valid || orderForm.controls.customerID.pristine" class="error-message">
+                            It can contain up to 2 digits, the number cannot start with zero.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="productID">Product ID</label>
+                        <input name="productID" [(ngModel)]="order.productID" type="text" class="form-control"
+                            pattern="^[1-9]{1}[0-9]{0,1}" required>
+                        <div [hidden]="orderForm.controls.productID?.valid || orderForm.controls.productID.pristine" class="error-message">
+                            It can contain up to 2 digits, the number cannot start with zero.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="amount">Amount</label>
+                        <input name="amount" [(ngModel)]="order.amount" type="text" class="form-control"
+                            pattern="^[1-9]{1}[0-9]{0,}" required>
+                        <div [hidden]="orderForm.controls.amount?.valid || orderForm.controls.amount.pristine" class="error-message">
+                            It can only contain numbers, the number cannot start with zero.
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="catid">Status</label>
+                        <select name="catid" [(ngModel)]="order.status" class="custom-select" required>
+                            <option value="new">New</option>
+                            <option value="paid">Paid</option>
+                            <option value="shipped">Shipped</option>
+                        </select>
+                    </div>
+                    <button [disabled]="orderForm.invalid" type="submit" class="btn btn-primary btn-block btn-lg mt-5">
+                        <i class="fa fa-save"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
